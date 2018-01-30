@@ -16,6 +16,12 @@ namespace App1Android
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+
+            //Getting an image stream from the resources and loading it with ImageSharp works
+            //https://github.com/SixLabors/ImageSharp/issues/223
+            Stream src = this.Resources.OpenRawResource(Resource.Drawable.tree);
+            Image<Rgba32> image = Image.Load(src);
+
             ButtonOnClick();
         }
         public static readonly int PickImageId = 1000;
