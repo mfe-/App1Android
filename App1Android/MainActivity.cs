@@ -41,8 +41,11 @@ namespace App1Android
             {
                 Android.Net.Uri uri = data.Data;
                 //get the selected file
-                using (Stream stream = ContentResolver.OpenInputStream(uri))
+                using (Android.Runtime.InputStreamInvoker stream = ContentResolver.OpenInputStream(uri) as Android.Runtime.InputStreamInvoker)
                 {
+                    //InputStreamInvoker.Position throws a System.NotSupportedException: Specified method is not supported.
+                    //stream.Position = 0;
+                    //therefore create a new memoryStream
                     using (MemoryStream memoryStream = new MemoryStream())
                     {
                         stream.CopyTo(memoryStream);
